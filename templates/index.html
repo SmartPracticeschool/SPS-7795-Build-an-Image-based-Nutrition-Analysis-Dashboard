@@ -1,0 +1,130 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Nutrisis</title>
+    <link rel="shortcut icon" href="{%  static 'images/favicon2.png' %}">
+  </head>
+	<body>
+		<style media="screen">
+		*{
+			font-family: 'Poppins', sans-serif;
+			font-size: 30px;
+		}
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: #e6e5e3;
+      text-align: center;
+    }
+    @keyframes pulse {
+    0% {
+      margin-top: -100px;
+      opacity: 0;
+    }
+    100% {
+      margin-top: 15px;
+      opacity: 0.92;
+    }
+  }
+			#image{
+				text-align: center;
+				padding: 100px;
+				border: 2px dashed black;
+			}
+			body{
+				background-image: url('https://www.azamara.com/sites/default/files/heros/med-food-hero.jpg')
+			}
+      .navbar{
+        background-color: black;
+        border-radius: 0px;
+      }
+			.jumbotron{
+        background-color: black;
+        color: white;
+        margin-top: 15px;
+        animation: pulse 2s;
+				opacity: 0.92;
+			}
+			#h4{
+			  border: none;
+			  color: black;
+			  text-decoration: none;
+			  display: inline-block;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			  border-radius: 16px;
+			  padding:10px;
+			  font-size: 25px;
+			  background-color: brown;
+			  text-transform: uppercase;
+			  font-weight: 500;
+			  border: none;
+			  border-radius: 45px;
+			  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+			  transition: all 0.3s ease 0s;
+			  cursor: pointer;
+			  outline: none;
+			}
+			#h4:hover {
+			  background-color: #2EE59D;
+			  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+			  color: #fff;
+			  transform: translateY(-7px);
+			}
+      input{
+        color:black;
+        background-color: brown;
+      }
+      h2{
+        font-size: 40px;
+      }
+		</style>
+    <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <ul class="nav navbar-nav navbar-left">
+       <li><a href="{%url 'land'%}">Nutrisis</a></li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+       <li><a href="{%url 'index'%}">Analyse</a></li>
+     </ul>
+   </div>
+ </nav>
+<div class="container">
+	<div class="jumbotron">
+		<center>
+      <h2>Food goes here</h2>
+			<form method="post" enctype="multipart/form-data" action="{% url 'index'%}" method="post">
+					{%csrf_token%}
+			{{form}}	<p></p>
+				<input type="submit" id='h4' value="Analyse">
+			</form>
+		</center>
+	</div>
+</div>
+<div class="footer">
+  <p>Have a chat with NutriBot</p>
+</div>
+<script>
+  window.watsonAssistantChatOptions = {
+      integrationID: "47284a82-3253-4966-ade7-307e8ca9e178", // The ID of this integration.
+      region: "eu-gb", // The region your integration is hosted in.
+      serviceInstanceID: "ab104d1c-163e-44b6-be4b-10e03ec8bf9e", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+    document.head.appendChild(t);
+  });
+</script>
+</body>
+</html>

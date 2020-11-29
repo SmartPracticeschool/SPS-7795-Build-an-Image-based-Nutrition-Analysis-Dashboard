@@ -1,0 +1,212 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+        <meta charset="utf-8">
+    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <title>Nutrisis</title>
+        <link rel="shortcut icon" href="{%  static 'images/favicon2.png' %}">
+    <style media="screen">
+    *{
+			font-family: 'Poppins', sans-serif;
+			font-size: 30px;
+      color:black;
+		}
+    #analysis {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    #analysis td, #analysis th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+   #analysis tr{background-color: #f2f2f2;}
+
+   #analysis tr:hover {background-color: #ddd;}
+
+   #analysis th {
+     padding-top: 12px;
+     padding-bottom: 12px;
+     text-align: left;
+     background-color: brown;
+     color: white;
+   }
+   .scroll
+   {
+     width:120%;
+     height: 300px;
+     overflow-x: auto;
+   }
+#h4{
+  border: none;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  padding:10px;
+  font-size: 25px;
+  background-color: brown;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+#h4:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+body{
+  background-image: url('https://image.freepik.com/free-vector/unhealthy-food-icon-set_1262-4658.jpg')
+}
+#nutris{
+  display: none;
+}
+.container{
+  width:90%;
+  color:white;
+  }
+  .jumbotron{
+    background-color: black;
+    opacity: 0.97;
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+  hr{
+    width: 70%;
+    border: 1px solid black;
+  }
+  .navbar{
+    background-color: black;
+    border-radius: 0px;
+  }
+  img{
+    border: 4px solid brown;
+    height: 400px;
+    width:400px;
+  }
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <ul class="nav navbar-nav navbar-left">
+       <li><a href="{%url 'land'%}">Nutrisis</a></li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+       <li><a href="{%url 'index'%}">Analyse</a></li>
+     </ul>
+   </div>
+ </nav>
+    <audio autoplay>
+  <source src="{%static 'audio/now.wav'%}" type="audio/wav">
+</audio>
+  <center>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 style="font-size:35px;">That's a good looking {{result.0.class|upper}}</h1>
+    <p></p>  <table>
+        <tr>
+  <td>
+    <img src={{image.image.url}} alt="" style="width:100%">
+  </td>
+  <td style="width:50px;">
+  </td>
+   <td>
+    <h2 style="color:white">Predictions</h2>
+  <div class="scroll">
+          <table id='analysis'>
+            <tr>
+              <th>Food</th>
+              <th>Percentage</th>
+            </tr>
+          {%for i in result%}
+            <tr>
+              <td>{{i.class}}</td>
+              <td>{{i.score}}</td>
+            </tr>
+            {%endfor%}
+          </table>
+  </div></td>
+        </tr>
+      </table>
+      <h3 style="color:white;margin-bottom:-20px">Scroll down for more</h3>
+    </div>
+  </div>
+<hr>
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Detailed Analysis for various {{result.0.class|title}}s</h2>
+      <div style="padding:20px">
+        <table id="analysis">
+          <th id='head'>Brand/Type</th>
+          <th>Nutrition</th>
+          {%for i in nutrition%}
+          {%if i.fdcId%}
+          <tr>
+            <td style="width:50%">{{i.description}},{{i.brandOwner}}</td>
+            <td style="text-align:center"><button id="h4" onclick="myFunction(this)">View</button>
+              <br>
+              <table id='nutris'>
+                <th>Nutrient</th>
+                <th>Value</th>
+                {%for j in i.foodNutrients%}
+                <tr>
+                  <td>{{j.nutrientName}}</td>
+                  <td>{{j.value}} MG</td>
+                </tr>
+                {%endfor%}
+              </table>
+            </td>
+          </tr>
+          {%endif%}
+          {%endfor%}
+        </table>
+      </div>
+    </div>
+  </div>
+  </center>
+  <div class="footer">
+    <p style="color:white">Have a chat with NutriBot</p>
+  </div>
+  <script type="text/javascript">
+  window.watsonAssistantChatOptions = {
+      integrationID: "47284a82-3253-4966-ade7-307e8ca9e178", // The ID of this integration.
+      region: "eu-gb", // The region your integration is hosted in.
+      serviceInstanceID: "ab104d1c-163e-44b6-be4b-10e03ec8bf9e", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+    document.head.appendChild(t);
+  });
+  function myFunction(obj) {
+var x =obj.parentElement;
+if (x.children[2].style.display == "block") {
+  x.children[2].style.display = "none";
+} else {
+  x.children[2].style.display = "block";
+}
+}
+  </script>
+  </body>
+</html>

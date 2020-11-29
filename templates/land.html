@@ -1,0 +1,92 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Nutrisis</title>
+    <link rel="shortcut icon" href="{%  static 'images/favicon2.png' %}">
+  </head>
+  <style media="screen">
+    body{
+      background-color: #010101;
+      background-image: url('https://www.freepik.com/blog/app/uploads/2018/06/food-cabacera-1-tasty-new.jpg');
+    }
+    *{
+      font-family: 'Poppins', sans-serif;
+    }
+    .left {
+      padding-top: 220px;
+      padding-left: 120px;
+      animation: pulse 2s;
+      background-color:#e6e5e3;
+      opacity:0.9;
+      color: black;
+      height: 552px;
+      width: 1100px;
+      border-top-right-radius: 100%;
+      border-top-left-radius: 1%;
+      border-bottom-right-radius: 1%;
+      border-bottom-left-radius: 1%;
+    }
+    @keyframes pulse {
+  0% {
+    background-color:black;
+    border-top-right-radius: 0%;
+    border-top-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+    padding-left: 0px;
+    opacity: 0;
+  }
+  100% {
+    background-color:#e6e5e3;
+border-top-right-radius: 100%;
+  border-top-left-radius: 1%;
+  border-bottom-right-radius: 1%;
+  border-bottom-left-radius: 1%;
+    padding-left: 120px;
+    opacity: 0.9;
+  }
+}
+#h1{
+  font-size: 100px;
+}
+#h3{
+  font-size: 40px;
+}
+#h4{
+  border: none;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  padding:10px;
+  font-size: 25px;
+  background-color: brown;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+#h4:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+  </style>
+  <body>
+    <div class="left">
+  <span id="h1"> Nutrisis </span><br>
+  <span id="h3"> Know your food better than ever </span><br><br>
+  <a href="{% url 'index' %}"><span id="h4"> Get Started</span><br></a>
+    </div>
+  </body>
+</html>
